@@ -1,38 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
-import Webcam from "react-webcam";
-import Input from '@material-ui/core/Input';
-// import TextField from '@material-ui/core/TextField';
-import * as loadImage from 'blueimp-load-image'
-
-
-class ImgReader extends Component {
-  workWorkWork(e) 
-  {
-    let files=e.target.files;
-    loadImage.parseMetaData(files[0], (data) => {
-      if(data.exif){
-        console.log('data: ', data.exif.getAll());
-      }
-    })
-  }
-  render() {
-    return (
-      <div>
-        <div>
-          <Input type="file" onChange={(e)=>this.workWorkWork(e)}/>
-        </div>
-        <Webcam audio={false} />
-      </div>
-    )
-  }
-}
+import ImgReader from './components/ImgReader'
+import DataTable from './components/DataTable'
 class App extends Component {
+  constructor(){
+    super();
+    this.state={imageInfo:{}};
+  }
+  dudeChill(data){
+    this.setState({imageInfo:data.exif.getAll()})
+  }
   render() {
     return (
       <div className="App">
       <h1>EXIF DATA READER</h1>
-          <ImgReader />
+          <ImgReader calmaDown={this.dudeChill.bind(this)} />
+          {this.state && Object.keys(this.state.imageInfo).length>0 && <DataTable imageInfo={this.state.imageInfo}/>}
       </div>
     );
   }
