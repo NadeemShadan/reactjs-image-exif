@@ -1,5 +1,5 @@
 import * as loadImage from 'blueimp-load-image'
-import Webcam from "react-webcam";
+// import Webcam from "react-webcam";
 import React, { Component } from 'react';
 import Input from '@material-ui/core/Input';
 
